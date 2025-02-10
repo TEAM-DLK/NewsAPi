@@ -1,5 +1,6 @@
 import logging
 import requests
+import asyncio
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
@@ -41,7 +42,7 @@ async def news(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(news_text)
 
 # Main function to start the bot
-async def main() -> None:
+def main() -> None:
     # Replace 'your_telegram_bot_token' with your bot's token
     TELEGRAM_BOT_TOKEN = "7306410200:AAH0EhPYB7ANk6bV4XIG63arhS-yAoHdIwQ"  # Replace with your Telegram bot token
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
@@ -50,8 +51,18 @@ async def main() -> None:
     application.add_handler(CommandHandler("news", news))
 
     # Start the bot with long polling
-    await application.run_polling()
+    application.run_polling()
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+    try:
+        # Check if an event loop is already running
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        # No event loop is running, so create a new one
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(main())
+    else:
+        # An event loop is already running, so run the main function in it
+        loop.create_task(main())
+        loop.run_forever()
