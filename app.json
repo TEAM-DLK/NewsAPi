@@ -1,6 +1,6 @@
 {
   "name": "Telegram News Bot",
-  "description": "A Telegram bot that fetches news using NewsData API",
+  "description": "A Telegram bot that fetches the latest Sri Lanka Helakuru news using NewsData.io API",
   "repository": "https://github.com/TEAM-DLK/NewsAPi",
   "keywords": ["telegram", "bot", "news", "python"],
   "buildpacks": [
