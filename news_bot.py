@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 # Your NewsData.io API URL and token
 NEWSDATA_API_URL = "https://newsdata.io/api/1/news"
-NEWSDATA_API_KEY = "your_newsdata_api_key"  # Replace with your API key
+NEWSDATA_API_KEY = "pub_688017fca8c049520b4d9f519c561ec08478a"  # Replace with your API key
 
 # Function to get news from NewsData.io
 def get_news():
@@ -43,7 +43,7 @@ async def news(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 # Main function to start the bot
 async def main() -> None:
     # Replace 'your_telegram_bot_token' with your bot's token
-    TELEGRAM_BOT_TOKEN = "your_telegram_bot_token"  # Replace with your Telegram bot token
+    TELEGRAM_BOT_TOKEN = "7306410200:AAH0EhPYB7ANk6bV4XIG63arhS-yAoHdIwQ"  # Replace with your Telegram bot token
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
     # Add the /news command handler
