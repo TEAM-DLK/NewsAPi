@@ -35,7 +35,11 @@ NEWSDATA_API_KEY = "your_newsdata_api_key"
 python news_bot.py
 
 ☁️ Deploy to Heroku
+## 🚀 Deploy to Heroku
 
+Click the button below to **deploy the bot to Heroku instantly**:  
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TEAM-DLK/NewsAPi)
 🔹 Using Heroku CLI
 
 heroku login
