@@ -9,7 +9,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Your NewsData.io API URL and token
-NEWSDATA_API_URL = "https://newsdata.io/api/1/news"
+NEWSDATA_API_URL = "https://newsdata.io/api/1/news?apikey=pub_688017fca8c049520b4d9f519c561ec08478a&q=Sri%20lanka%20helakuru%20news"
 NEWSDATA_API_KEY = "pub_688017fca8c049520b4d9f519c561ec08478a"  # Replace with your API key
 
 # Function to get news from NewsData.io
