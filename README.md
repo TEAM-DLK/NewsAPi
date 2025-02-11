@@ -13,8 +13,8 @@ A Telegram bot that fetches the latest Sri Lankan news using NewsAPI and respond
 
 1️⃣ Clone the Repository
 
-git clone https://github.com/your-username/telegram-news-bot.git
-cd telegram-news-bot
+git clone https://github.com/TEAM-DLK/NewsAPi.git
+cd NewsAPi
 
 2️⃣ Install Dependencies
 
