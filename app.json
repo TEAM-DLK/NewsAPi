@@ -11,7 +11,7 @@
       "description": "Your Telegram Bot Token from BotFather",
       "required": true
     },
-    "NEWSDATA_API_KEY": {
+    "NEWS_API_KEY": {
       "description": "Your API key from NewsData.io",
       "required": true
     }
