@@ -1,78 +1,111 @@
-📢 Telegram News Bot
+📰 Telegram News Bot (Sri Lanka)
 
-A Telegram bot that fetches the latest Sri Lanka Helakuru news using the NewsData.io API and sends updates to users.
+A Telegram bot that fetches the latest Sri Lankan news using NewsAPI and responds to the /news command.
 
-🚀 Features
-	•	Fetches latest Sri Lanka news from NewsData.io.
-	•	Uses Telegram Bot API to respond to /news command.
-	•	Supports Heroku and Docker deployment.
+📌 Features
 
-🔧 Setup Instructions
+✅ Fetches top news from NewsAPI
+✅ Supports /news command to get the latest headlines
+✅ Uses python-telegram-bot for Telegram API integration
+✅ Supports deployment on Heroku (with or without Docker)
 
-1️⃣ Get API Keys
-	1.	Create a Telegram Bot:
-	•	Go to BotFather on Telegram.
-	•	Use /newbot to create a bot and get the Telegram Bot Token.
-	2.	Get NewsData API Key:
-	•	Sign up at NewsData.io.
-	•	Get your API Key from the dashboard.
+🚀 Setup & Installation
 
-2️⃣ Local Setup
+1️⃣ Clone the Repository
 
-🔹 Install Dependencies
+git clone https://github.com/your-username/telegram-news-bot.git
+cd telegram-news-bot
+
+2️⃣ Install Dependencies
 
 pip install -r requirements.txt
 
-🔹 Create config.py
+3️⃣ Configure API Keys
 
-Create a config.py file and add:
+Create a config.py file and add your Telegram Bot Token and NewsAPI Key:
 
-TELEGRAM_BOT_TOKEN = "your_telegram_bot_token"
-NEWSDATA_API_KEY = "your_newsdata_api_key"
+# config.py
+TELEGRAM_BOT_TOKEN = "your-telegram-bot-token"
+NEWS_API_KEY = "your-news-api-key"
 
-🔹 Run the Bot Locally
+4️⃣ Run the Bot Locally
 
 python news_bot.py
 
-☁️ Deploy to Heroku
-## 🚀 Deploy to Heroku
+🛠 Deploying to Heroku
 
-Click the button below to **deploy the bot to Heroku instantly**:  
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TEAM-DLK/NewsAPi)
-🔹 Using Heroku CLI
+A. Deploy Without Docker
+	1.	Login to Heroku:
 
 heroku login
-heroku create your-bot-name
+
+
+	2.	Create a new Heroku app:
+
+heroku create your-app-name
+
+
+	3.	Add a Procfile (if not already created):
+
+worker: python news_bot.py
+
+
+	4.	Deploy to Heroku:
+
+git add .
+git commit -m "Deploy Telegram bot to Heroku"
 git push heroku main
-heroku config:set TELEGRAM_BOT_TOKEN=your_token
-heroku config:set NEWSDATA_API_KEY=your_api_key
+
+
+	5.	Scale the worker:
+
 heroku ps:scale worker=1
-heroku restart
 
-🔹 One-Click Deploy
 
-Click the button below to deploy directly to Heroku:
 
-🐳 Deploy with Docker
-
-🔹 Build & Run Locally
-
-docker build -t telegram-news-bot .
-docker run --env TELEGRAM_BOT_TOKEN=your_token --env NEWSDATA_API_KEY=your_api_key telegram-news-bot
-
-🔹 Deploy to Heroku
+B. Deploy With Docker
+	1.	Login to Heroku container registry:
 
 heroku container:login
-heroku container:push web -a your-bot-name
-heroku container:release web -a your-bot-name
-heroku ps:scale web=1
 
-🛠 Bot Commands
 
-Command	Description
-/news	Fetches the latest Sri Lanka Helakuru news
+	2.	Build and push the Docker image:
+
+heroku container:push web -a your-app-name
+
+
+	3.	Release the container:
+
+heroku container:release web -a your-app-name
+
+📜 Usage
+	•	Start a chat with your bot on Telegram
+	•	Send /news to get the latest Sri Lankan news
+
+🔧 Troubleshooting
+
+Issue: telegram.error.BadRequest: Message text is empty
+✔️ Fix: Ensure get_news() always returns text. Modify the function like this:
+
+def get_news():
+    url = f"https://newsapi.org/v2/top-headlines?country=lk&apiKey={config.NEWS_API_KEY}"
+    response = requests.get(url)
+    news_data = response.json()
+
+    if news_data.get("status") == "ok":
+        articles = news_data.get("articles", [])
+        if not articles:
+            return "📰 No news available at the moment."
+        
+        news_list = [f"📰 {article['title']} - {article['url']}" for article in articles[:5]]
+        return "\n\n".join(news_list)
+
+    return "❌ Failed to fetch news."
 
 📜 License
 
-This project is licensed under the MIT License.
+This project is open-source and licensed under the MIT License.
+
+💡 Contributing
+
+Feel free to submit pull requests or open issues for feature suggestions.
