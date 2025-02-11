@@ -1,7 +1,7 @@
 import requests
+import config
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
-import config  # Import config.py
+from telegram.ext import Application, CommandHandler, CallbackContext
 
 # Function to fetch news
 def get_news():
@@ -17,20 +17,19 @@ def get_news():
         return "❌ Failed to fetch news."
 
 # Command handler for /news
-def news(update: Update, context: CallbackContext):
-    chat_id = update.message.chat_id
+async def news(update: Update, context: CallbackContext):
     news_text = get_news()
-    context.bot.send_message(chat_id=chat_id, text=news_text)
+    await update.message.reply_text(news_text)
 
 # Main function to run the bot
 def main():
-    updater = Updater(config.TELEGRAM_BOT_TOKEN, use_context=True)
-    dp = updater.dispatcher
-    dp.add_handler(CommandHandler("news", news))
+    app = Application.builder().token(config.TELEGRAM_BOT_TOKEN).build()
     
+    # Add handlers
+    app.add_handler(CommandHandler("news", news))
+
     print("🤖 Bot is running...")
-    updater.start_polling()
-    updater.idle()
+    app.run_polling()
 
 if __name__ == "__main__":
     main()
