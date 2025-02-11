@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, CallbackContext
 
 # Function to fetch news from NewsAPI
 def get_news():
-    url = f"https://newsapi.org/v2/top-headlines?country=lk&apiKey={config.NEWS_API_KEY}"
+    url = f"https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey={config.NEWS_API_KEY}"
     response = requests.get(url)
     news_data = response.json()
 
