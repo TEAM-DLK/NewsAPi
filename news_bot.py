@@ -1,14 +1,11 @@
 import requests
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
-
-# Replace with your tokens
-TELEGRAM_BOT_TOKEN = "your-telegram-bot-token"
-NEWS_API_KEY = "your-news-api-key"
+import config  # Import config.py
 
 # Function to fetch news
 def get_news():
-    url = f"https://newsapi.org/v2/top-headlines?country=lk&apiKey={NEWS_API_KEY}"
+    url = f"https://newsapi.org/v2/top-headlines?country=lk&apiKey={config.NEWS_API_KEY}"
     response = requests.get(url)
     news_data = response.json()
     
@@ -27,7 +24,7 @@ def news(update: Update, context: CallbackContext):
 
 # Main function to run the bot
 def main():
-    updater = Updater(TELEGRAM_BOT_TOKEN, use_context=True)
+    updater = Updater(config.TELEGRAM_BOT_TOKEN, use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("news", news))
     
